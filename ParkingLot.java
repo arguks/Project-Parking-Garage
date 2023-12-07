@@ -1,21 +1,29 @@
-
 package com.krisstelargueta.parkinggarage;
 
-class ParkingLot {
-    private parkingSpot[] spots;
-    private int amountOfSpots;
-    
-    
 
-    public ParkingLot(){
-        this.amountOfSpots = 10;
-        spots[amountOfSpots];
-            
-        }
+class ParkingLot {
+    private parkingSpot[] spots; 
+  
+    public ParkingLot(int spaces){
+        spots = new parkingSpot[spaces];   
     }
     
-    public parkingLot(int aos){
-        this.amountOfSpots = aos;
+    //how many spots are available
+    public int checkAvailability(){
+        int avail =0;
+       for (parkingSpot x : spots){
+            if(x.isEmpty()){
+                avail++;
+            }
+        } 
+       return avail;
     }
- 
+    
+    public boolean isFull(){
+        if(checkAvailability() == spots.length){
+            return true;
+        }
+        return false;
+    }
+    
 }

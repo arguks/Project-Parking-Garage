@@ -1,5 +1,5 @@
-
 package com.krisstelargueta.parkinggarage;
+
 
 class parkingSpot {
     private Car parkedCar;
@@ -23,6 +23,5 @@ class parkingSpot {
         parkedCar = null;
         return temp;
     }
-    
-    
+      
 }
