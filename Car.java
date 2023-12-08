@@ -2,9 +2,12 @@ package com.krisstelargueta.parkinggarage;
 
 public class Car{
   private int car_id;
-  private int timeParked;
+  private int timeParked; //the max stay is 10080 minutes = 1 week 
   
-  public Car(int car_id, int timeParked){
+  public Car(int car_id, int timeParked) throws TimeException{
+      if(timeParked > 10080 || timeParked < 30){
+          throw new TimeException("You may park between 30 minutes to 10080 minutes. Please try again.");
+      }
       this.car_id = car_id;
       this.timeParked = timeParked;
   }

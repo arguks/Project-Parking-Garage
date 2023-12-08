@@ -2,16 +2,16 @@ package com.krisstelargueta.parkinggarage;
 
 
 class ParkingLot {
-    private parkingSpot[] spots; 
+    private static Space[] spots; 
   
     public ParkingLot(int spaces){
-        spots = new parkingSpot[spaces];   
+        spots = new Space[spaces];   
     }
     
     //how many spots are available
-    public int checkAvailability(){
+    public int numSpotsAvailable(){
         int avail =0;
-       for (parkingSpot x : spots){
+       for (Space x : spots){
             if(x.isEmpty()){
                 avail++;
             }
@@ -20,10 +20,20 @@ class ParkingLot {
     }
     
     public boolean isFull(){
-        if(checkAvailability() == spots.length){
+        if(numSpotsAvailable() == spots.length){
             return true;
         }
         return false;
+    }
+    
+    public void parkCar(Car car){
+        if(!isFull()){
+            int i = 0;
+            while(!spots[i].isEmpty()){
+                i++;
+            }
+            spots[i].parkCar(car);
+        }
     }
     
 }
