@@ -5,10 +5,12 @@ public class Main {
 
     public static Scanner sc = new Scanner(System.in);
 
+ 
     public static void main(String[] args) throws TimeException {
         boolean exit = false;
         ParkingGarage garage = new ParkingGarage(3, 10);
 
+        //this will iterate until the user inputs 3 to exit the program
         do {
             int numLevels = garage.getnumLevels();
 
@@ -19,6 +21,7 @@ public class Main {
 
             int choice = sc.nextInt();
 
+            //the switch cases will determin what the program will do based on user input
             switch (choice) {
                 case 1:
                     parkCar(garage);
@@ -39,6 +42,8 @@ public class Main {
         } while (!exit);
     }
 
+    //this method will park the users car, there is a loop that will not allow a user to enter a time above 1440 minutes
+    //a car will also be randomly assigned a car id from 1-1000
     public static void parkCar(ParkingGarage garage) throws TimeException {
        int time;
 
@@ -58,6 +63,7 @@ public class Main {
         garage.printLevelsArray();
     }
 
+    //this method will retrieve the car for the customer
     public static void retrieveCar(int car_id, ParkingGarage garage) {
         garage.retrieveCarGarage(car_id);
         System.out.println("Here is your car, have a great day.");

@@ -23,30 +23,33 @@ public class ParkingGarage {
     
     //this parks the car at the level we determined in method determine where to park
     public void parkCarGarage (Car car, int time){
-        if(time < 1440){
+        if(time <= 1440){
         levels[determineWhereToPark(time)].parkCarLevel(car);
         } else {
             throw new ArrayIndexOutOfBoundsException("You cannot park over 24 hours");
         }
     }
     
-    //this returns which level we are parking the car
+    //this returns which level where we will be parking the car
     public int determineWhereToPark  (int time){
         
         //ex. 3 levels will have 480 minute interval each level
-        // Level 1: 1- 479
+        // Level 1: 1- 480
         // Level 2: 481-960
         // Level 3: 961-1440
         
         //total range size
         int timePerLevel = 1440/numLevels;
         
-        //max time at the lowest level
+        //max time at the highest level
         int currMax = timePerLevel;
         int currMin = 1;
         int currLevel = 0;
         boolean found = false;
         
+        //this while loop will check if the time is within the range of minutes and if the current level is not full
+        //if it is full, we will increment the min, max and go to the next level
+        //when an acceptable level is found we will return the current level
         while(!found && currLevel < numLevels){
             if(time>=currMin && time <= currMax){
                 if(!levels[currLevel].isFull()){
@@ -64,6 +67,8 @@ public class ParkingGarage {
         }
         return currLevel;
     }
+    
+    //this will find a car in the level and return the car if it exists
     public Car findCar (int carID){
         for(ParkingLot level: levels){
             if(level.carExists(carID)){
@@ -73,6 +78,7 @@ public class ParkingGarage {
         return null;
     }
     
+    //this will iterate through the levels, check if the car exists in each level and then retrieve the car for the customer
     public void retrieveCarGarage (int carID){
         for(ParkingLot level: levels){
             if(level.carExists(carID)){
@@ -81,6 +87,7 @@ public class ParkingGarage {
         }
     }
     
+    //getter methods
     public int getSpaces (){
         return spaces;
     }
@@ -89,6 +96,7 @@ public class ParkingGarage {
         return numLevels;
     }
     
+    //this will print the arrays in order to visualize the parking garage
     public void printLevelsArray() {
         for (int i = 0; i < getnumLevels(); i++) {
             System.out.print("Level " + (i + 1) + ": [");
