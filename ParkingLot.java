@@ -2,17 +2,22 @@ package com.krisstelargueta.parkinggarage;
 
 
 class ParkingLot {
-    private static Space[] spots; 
-  
-    public ParkingLot(int spaces){
-        spots = new Space[spaces];   
+    private Space[] spots;
+    private int spaces;
+    public ParkingLot(int spaces) {
+        spots = new Space[spaces];
+        this.spaces = spaces;
+        for (int i = 0; i < spaces; i++) {
+            spots[i] = new Space();
+        }
     }
+
     
     //how many spots are available
     public int numSpotsAvailable(){
         int avail =0;
        for (Space x : spots){
-            if(x.isEmpty()){
+            if(!x.isEmpty()){
                 avail++;
             }
         } 
@@ -26,14 +31,14 @@ class ParkingLot {
         return false;
     }
     
-    public boolean carExists (int carID){
-        for(Space spot: spots){
-            if(carID == spot.getParkedCar().getCarID()){
-                return true;
-            }
+    public boolean carExists(int carID) {
+    for (Space spot : spots) {
+        if (!spot.isEmpty() && carID == spot.getParkedCar().getCarID()) {
+            return true;
         }
-        return false;
     }
+    return false;
+}
     
     public Car findCar (int carID){
         for(Space spot: spots){
@@ -54,15 +59,18 @@ class ParkingLot {
         }
     }
     
-    public void retrieveCarLevel(int carID){
-        for (Space spot : spots) {
-            if (carExists(carID)) {
-               spot.retrieveCar();
-               System.out.println("Here is your car. Have a Great Day!\nOverview:\nCarID: " + carID);
-            } else {
-                System.out.println("This car does not exist in our parking garage.");
-            }
+    public void retrieveCarLevel(int carID) {
+    for (Space spot : spots) {
+        if (!spot.isEmpty() && carExists(carID)) {
+            spot.retrieveCar();
+            System.out.println("Here is your car. Have a Great Day!\nOverview:\nCarID: " + carID);
+            return;  // exit the method after finding and retrieving the car
         }
     }
+    System.out.println("This car does not exist in our parking garage.");
+    }
     
+    public Space[] getSpots (){
+        return spots;
+    }
 }
