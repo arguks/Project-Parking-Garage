@@ -10,7 +10,7 @@ public class Main {
     static int counter3;
     public static Scanner sc = new Scanner(System.in);
     
-    public static void main(String[] args) { 
+    public static void main(String[] args) throws TimeException { 
         ParkingGarage garage = new ParkingGarage(3,10);
         int numLevels = garage.getnumLevels();
         
@@ -23,10 +23,12 @@ public class Main {
         
         switch (choice){
             case 1:
-                
+                parkCar(garage);
                 break;
             case 2:
-               // retrieveCar();
+                System.out.println("Please enter the car id: ");
+                int car_id = sc.nextInt();
+                retrieveCar(car_id);
                 break;
             case 3:
                // showSpots();
@@ -36,10 +38,17 @@ public class Main {
                 break;
         }
     }
-        public static void parkCar(int numLevels, ParkingGarage garage){
+        public static void parkCar(ParkingGarage garage) throws TimeException{
             System.out.println("How long is your stay?");
-                int time = sc.nextInt(); //time in MINUTES
-                
-        }   
+            int time = sc.nextInt(); //time in MINUTES
+            Car car = new Car(((int) (Math.random() * 1000) + 1), time);
+            int parkAtLevel = garage.determineWhereToPark(car.getParkingDuration());
+            garage.parkCarGarage(car, time);
+        }  
+        
+        public static void retrieveCar (int car_id,ParkingGarage garage){
+            garage.
+            System.out.println("Here is your car, have a great day.");              
         }
+}
         

@@ -18,10 +18,12 @@ class Space {
         }
     }
     
-    public Car remove(){
-        Car temp = parkedCar;
+    public void retrieveCar(){
         parkedCar = null;
-        return temp;
+    }
+    
+    public Car getParkedCar(){
+        return parkedCar;
     }
       
 }

@@ -26,13 +26,42 @@ class ParkingLot {
         return false;
     }
     
-    public void parkCar(Car car){
+    public boolean carExists (int carID){
+        for(Space spot: spots){
+            if(carID == spot.getParkedCar().getCarID()){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public Car findCar (int carID){
+        for(Space spot: spots){
+            if(carID == spot.getParkedCar().getCarID()){
+                return spot.getParkedCar();
+            }
+        }
+        return null;
+    }
+    
+    public void parkCarLevel(Car car){
         if(!isFull()){
             int i = 0;
             while(!spots[i].isEmpty()){
                 i++;
             }
             spots[i].parkCar(car);
+        }
+    }
+    
+    public void retrieveCarLevel(int carID){
+        for (Space spot : spots) {
+            if (carExists(carID)) {
+               spot.retrieveCar();
+               System.out.println("Here is your car. Have a Great Day!\nOverview:\nCarID: " + carID);
+            } else {
+                System.out.println("This car does not exist in our parking garage.");
+            }
         }
     }
     
